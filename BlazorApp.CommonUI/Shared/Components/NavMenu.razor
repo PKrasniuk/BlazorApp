@@ -1,0 +1,50 @@
+﻿@inherits SharedModels.Components.NavMenuModel
+
+<MatNavMenu Multi="true" Class="app-sidebar">
+    <MatNavItem Href="@NavigationManager.ToAbsoluteUri(" ").AbsoluteUri" NavLinkMatch="NavLinkMatch.All">
+        <MatIcon>home</MatIcon> <span class="miniHover">Home page</span>
+    </MatNavItem>
+
+    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("todo_list").AbsoluteUri">
+        <MatIcon>list_alt</MatIcon> <span class="miniHover">Todo List</span>
+    </MatNavItem>
+
+    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("dashboard").AbsoluteUri" Disabled="@(!IsLoggedIn)">
+        <MatIcon>bar_chart</MatIcon> <span class="miniHover">Dashboard</span>
+    </MatNavItem>
+
+    <AuthorizeView Policy="@Policies.IsAdmin" Context="AuthorizeContext">
+        <Authorized>
+            <MatNavSubMenu>
+                <MatNavSubMenuHeader>
+                    <MatNavItem AllowSelection="false">
+                        <MatIcon>settings_applications</MatIcon> <span class="miniHover">Admin</span>
+                    </MatNavItem>
+                </MatNavSubMenuHeader>
+                <MatNavSubMenuList>
+                    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("admin/users").AbsoluteUri">
+                        <MatIcon>supervisor_account</MatIcon> <span class="miniHover">Users</span>
+                    </MatNavItem>
+                    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("admin/roles").AbsoluteUri">
+                        <MatIcon>supervisor_account</MatIcon> <span class="miniHover">Roles</span>
+                    </MatNavItem>
+                    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("admin/blazor_audit").AbsoluteUri">
+                        <MatIcon>change_history</MatIcon> <span class="miniHover">Api Audit Log</span>
+                    </MatNavItem>
+                    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("admin/dbLog").AbsoluteUri">
+                        <MatIcon>notes</MatIcon> <span class="miniHover">DB Logging</span>
+                    </MatNavItem>
+                </MatNavSubMenuList>
+            </MatNavSubMenu>
+        </Authorized>
+        <NotAuthorized>
+            <MatNavItem Href="@NavigationManager.ToAbsoluteUri("admin/users").AbsoluteUri" Disabled="true">
+                <MatIcon>supervisor_account</MatIcon> <span class="miniHover">Admin</span>
+            </MatNavItem>
+        </NotAuthorized>
+    </AuthorizeView>
+
+    <MatNavItem Href="@NavigationManager.ToAbsoluteUri("forum").AbsoluteUri" Disabled="@(!IsLoggedIn)">
+        <MatIcon>forum</MatIcon> <span class="miniHover">Forum</span>
+    </MatNavItem>
+</MatNavMenu>

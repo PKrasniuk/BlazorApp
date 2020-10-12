@@ -1,0 +1,16 @@
+﻿@inherits PageModels.Forum.ForumMessagePageModel
+
+<EditForm Model="@MessageModel" OnValidSubmit="@DeleteMessage">
+    <MatListItem>
+        <MatListItemText Class="@MessageModel.CSS" Style="width: 100%;">
+            <MatListItemPrimaryText>
+                @MessageModel.UserName
+            </MatListItemPrimaryText>
+            <MatListItemSecondaryText>
+                @MessageModel.Text
+            </MatListItemSecondaryText>
+        </MatListItemText>
+        <MatIconButton Icon="delete" Type="submit" Style="float: right;"></MatIconButton>
+    </MatListItem>
+    <MatListDivider></MatListDivider>
+</EditForm>

@@ -1,0 +1,98 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>ec572aea-4a6f-4b13-a582-c15799999067</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+    <Configurations>Debug;Release;DebugCSB</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MatBlazor" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0-preview3.20168.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.1.0" />
+    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="11.0.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorApp.BLL\BlazorApp.BLL.csproj" />
+    <ProjectReference Include="..\BlazorApp.Client\BlazorApp.Client.csproj" />
+    <ProjectReference Include="..\BlazorApp.CommonUI\BlazorApp.CommonUI.csproj" />
+    <ProjectReference Include="..\BlazorApp.Common\BlazorApp.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\ForgotPassword.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\NewUserConfirmationEmail.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\NewUserEmail.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\NewUserNotificationEmail.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\PasswordReset.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\PlainTextTestEmail.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='DebugCSB'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugCSB|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;ClientSideBlazor</DefineConstants>
+  </PropertyGroup>
+
+</Project>

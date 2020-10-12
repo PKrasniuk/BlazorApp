@@ -1,0 +1,22 @@
+﻿@inherits SharedModels.Components.BreadcrumbsModel
+
+<ul class="breadcrumb">
+    <li>
+        <a href="/">@RootLinkTitle</a>
+    </li>
+    @foreach (var path in Paths.Select((value, i) => (value, i)))
+    {
+        if (path.i == Paths.Count())
+        {
+            <li>
+                <a href="@(BaseUrl + string.Join("/", Paths))">
+                    @path.value.Replace("_", " ")
+                </a>
+            </li>
+        }
+        else
+        {
+            <li>@path.value.Replace("_", " ")</li>
+        }
+    }
+</ul>

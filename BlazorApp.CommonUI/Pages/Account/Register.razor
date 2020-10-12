@@ -1,0 +1,46 @@
+﻿@page "/account/register"
+
+@layout LoginLayout
+@inherits PageModels.Account.RegisterPageModel
+
+<MatCard>
+    <div class="logo">
+        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Blazor App" />
+        <br />
+        Blazor App
+        <br />
+        <h4>Create Account</h4>
+    </div>
+
+    <EditForm Model="@RegisterParameters" OnValidSubmit="@RegisterUserAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset>
+            <div class="form-group">
+                <MatTextField @bind-Value="@RegisterParameters.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@RegisterParameters.Email" Label="Email" Icon="mail_outline" IconTrailing="true" FullWidth="true" Required="true">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@RegisterParameters.Password" Label="Password" Icon="lock_outline"
+                              IconTrailing="true" FullWidth="true" Required="true" Type="password">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@RegisterParameters.PasswordConfirm" Label="Password Confirmation" Icon="lock_outline"
+                              IconTrailing="true" FullWidth="true" Required="true" Type="password">
+                </MatTextField>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <MatButton Type="submit" Raised="true">Create account</MatButton>
+            </div>
+            <hr />
+            <NavLink href="account/login">
+                <h6 class="font-weight-normal text-center">Already have an account? Click here to login</h6>
+            </NavLink>
+        </fieldset>
+    </EditForm>
+</MatCard>

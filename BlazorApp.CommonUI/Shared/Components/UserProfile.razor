@@ -1,0 +1,21 @@
+﻿@inherits SharedModels.Components.UserProfileModel
+
+<AuthorizeView>
+    <Authorized>
+        <div class="drawer-profile">
+            <MatIconButton Icon="account_circle" Link="/account/profile"></MatIconButton>
+            @if (UserInfoModel == null)
+            {
+                <div class="spinner-border spinner-border-sm" role="status"></div>
+            }
+            else
+            {
+                <span class="miniHover">
+                    <b>
+                        <NavLink href="/account/profile">@UserInfoModel.UserName</NavLink>
+                    </b>
+                </span>
+            }
+        </div>
+    </Authorized>
+</AuthorizeView>

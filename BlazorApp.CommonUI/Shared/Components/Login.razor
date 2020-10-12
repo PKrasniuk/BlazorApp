@@ -1,0 +1,14 @@
+﻿@inherits SharedModels.Components.LoginModel
+
+<AuthorizeView Context="AuthorizeContext">
+    <Authorized>
+        <MatTooltip Tooltip="Logout">
+            <MatIconButton Icon="exit_to_app" RefBack="@context" OnClick="@LogoutClickAsync"></MatIconButton>
+        </MatTooltip>
+    </Authorized>
+    <NotAuthorized>
+        <MatTooltip Tooltip="Login">
+            <MatIconButton Icon="account_box" RefBack="@context" Link="/account/login"></MatIconButton>
+        </MatTooltip>
+    </NotAuthorized>
+</AuthorizeView>

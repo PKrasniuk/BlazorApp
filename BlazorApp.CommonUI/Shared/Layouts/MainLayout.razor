@@ -1,0 +1,53 @@
+﻿@inherits SharedModels.Layouts.MainLayoutModel
+
+<MatDrawerContainer Style="height: 100vh; width: 100vw;" Class="@BbDrawerClass">
+    <MatDrawer Opened="@NavMenuOpened">
+        <header class="drawer-header">
+            <div class="drawer-logo">
+                <img alt="Blazor App" class="logo-img" src="_content/BlazorApp.CommonUI/images/blazorboilerplate-dark.svg" title="Blazor App">
+                <a class="miniHover" href="/">Blazor App</a>
+            </div>
+            <UserProfile />
+        </header>
+        <NavMenu />
+        <footer class="drawer-footer">
+        </footer>
+    </MatDrawer>
+    <MatDrawerContent>
+        <MatAppBarContainer>
+            <MatAppBar Fixed="true">
+                <MatAppBarRow>
+                    <MatAppBarSection>
+                        <MatAppBarTitle>
+                        </MatAppBarTitle>
+                        <div class="hidden-mdc-down">
+                            <MatTooltip Tooltip="Toggle Navigation">
+                                <MatIconButton Class="navToggle" Icon="menu" ToggleIcon="menu" OnClick="@(e => NavToggle())" RefBack="@context">
+                                </MatIconButton>
+                            </MatTooltip>
+                            <MatTooltip Tooltip="Minify Navigation">
+                                <MatIconButton Class="navToggle" Icon="format_indent_decrease" ToggleIcon="format_indent_increase"
+                                               OnClick="@(e => NavMinify())" RefBack="@context">
+                                </MatIconButton>
+                            </MatTooltip>
+                        </div>
+                    </MatAppBarSection>
+                    <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                        <Login></Login>
+                    </MatAppBarSection>
+                </MatAppBarRow>
+            </MatAppBar>
+            <MatAppBarContent>
+                <Breadcrumbs RootLinkTitle="Home"></Breadcrumbs>
+                <section class="container-fluid">
+                    @Body
+                </section>
+                <footer class="page-footer">
+                    <div class="flex-1">
+                        © 2020 Blazor App Version 1.0.0
+                    </div>
+                </footer>
+            </MatAppBarContent>
+        </MatAppBarContainer>
+    </MatDrawerContent>
+</MatDrawerContainer>

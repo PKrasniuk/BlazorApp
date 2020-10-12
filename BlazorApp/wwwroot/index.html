@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BlazorApp</title>
+    <link rel="shortcut icon" type="image/x-icon" href="_content/BlazorApp.CommonUI/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="_content/BlazorApp.CommonUI/images/favicon.ico">
+    <base href="/"/>
+    <link href="_content/BlazorApp.CommonUI/fontawesome/css/fontawesome.min.css" rel="stylesheet"/>
+    <link href="_content/BlazorApp.CommonUI/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet"/>
+    <link href="_content/BlazorApp.CommonUI/css/site.css" rel="stylesheet"/>
+    <script>
+        window.SetFocus = (id) => document.getElementById(id).focus();
+    </script>
+</head>
+<body>
+<app>
+    <div class="triangle-container">
+        <div class="triangles">
+        </div>
+    </div>
+    <div class="loading-container">
+        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" alt="Loading" title="Loading Blazor App"/><br/>
+        Loading Blazor App
+    </div>
+</app>
+
+<div id="blazor-error-ui">
+    <i class="material-icons">error</i>
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<script src="_framework/blazor.webassembly.js"></script>
+<script src="_content/MatBlazor/dist/matBlazor.js"></script>
+<script src="_content/BlazorApp.CommonUI/javascript/signalr.min.js"></script>
+<script src="_content/BlazorApp.CommonUI/javascript/chatClient.js"></script>
+</body>
+</html>

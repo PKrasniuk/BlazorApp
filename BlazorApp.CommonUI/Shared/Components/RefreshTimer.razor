@@ -1,0 +1,18 @@
+﻿@inherits SharedModels.Components.RefreshTimerModel
+
+<div class="refresh-timer row">
+    <div>@Label</div>
+    <div>
+        <MatSlideToggle @bind-Value="@TimerInterval.Enabled" />
+    </div>
+    <div class="refresh-timer-interval-wrapper">
+        <MatNumericUpDownField Label="@Text"
+                               Value="@Interval"
+                               ValueChanged="@UpdateInterval"
+                               DecimalPlaces="0"
+                               Dense="true"
+                               Minimum="1"
+                               TValue="double">
+        </MatNumericUpDownField>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@page "/todo_list"
+
+@layout MainLayout
+@inherits PageModels.TodoListPageModel
+
+<h1>
+    Todo List - CRUD
+</h1>
+<p>
+    This Todo List demonstrates fetching data from the server and CRUD for Blazor with .NET Core API server.
+    Delete is Protected to Admin users only.
+</p>
+
+<MatTable Class="mat-elevation-z5" Items="@TodoModelList" LoadInitialData="true" Striped="true" FilterByColumnName="Title" DebounceMilliseconds="150" PageSize="10">
+    <MatTableHeader>
+        <th>
+            <div style="width: 135px;">
+                <MatButton Icon="playlist_add" Label="New Todo" OnClick="@(e => OpenDialog())" Raised="true"></MatButton>
+            </div>
+        </th>
+        <th style="min-width: 400px;">
+            Id
+        </th>
+        <th>
+            Completed
+        </th>
+        <th style="min-width: 180px;">
+            Todo
+        </th>
+    </MatTableHeader>
+    <MatTableRow Context="todoRow">
+        <td>
+            <MatIconButton Icon="delete" OnClick="@(() => OpenDeleteDialog(todoRow.Id))"></MatIconButton>
+        </td>
+        <td>
+            @todoRow.Id
+        </td>
+        <td>
+            <MatCheckbox class="filled-in chk-col-blue" TValue="bool" Value="@todoRow.IsCompleted" ValueChanged="@(item => UpdateAsync(todoRow))"></MatCheckbox>
+        </td>
+        <td>
+            @todoRow.Title
+        </td>
+    </MatTableRow>
+</MatTable>
+
+<MatDialog IsOpen="@DialogIsOpen">
+    <MatDialogTitle>Create Todo</MatDialogTitle>
+    <MatDialogContent>
+        <EditForm Model="@Todo" OnValidSubmit="@CreateAsync">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <fieldset>
+                <div class="form-group">
+                    <MatTextField @bind-Value="@Todo.Title" Label="Title" Icon="title" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
+                </div>
+                <div class="form-group">
+                    <MatCheckbox @bind-Value="@Todo.IsCompleted" Label="Completed"></MatCheckbox>
+                </div>
+            </fieldset>
+        </EditForm>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { DialogIsOpen = false; })">
+            Cancel
+        </MatButton>
+        <MatButton OnClick="@CreateAsync">
+            Create Todo
+        </MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+<MatDialog IsOpen="@DeleteDialogOpen" Style="z-index: 100">
+    <MatDialogTitle>
+        <MatIcon Icon="warning"></MatIcon> Confirm Delete
+    </MatDialogTitle>
+    <MatDialogContent>
+        Are you sure you want to delete todo "@Todo.Title" ?
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { DeleteDialogOpen = false; })">
+            Cancel
+        </MatButton>
+        <MatButton OnClick="@DeleteAsync">
+            Delete
+        </MatButton>
+    </MatDialogActions>
+</MatDialog>

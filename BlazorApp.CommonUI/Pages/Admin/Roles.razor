@@ -1,0 +1,112 @@
+﻿@page "/admin/roles"
+
+@attribute [Authorize]
+@layout MainLayout
+@inherits PageModels.Admin.RolesPageModel
+
+<h1>Roles</h1>
+<p>Roles Management</p>
+
+@if (Roles == null)
+{
+    <LoadingBackground ShowLogoBox="true">
+        <label>Loading Roles</label>
+    </LoadingBackground>
+}
+else
+{
+    <MatTable Class="mat-elevation-z5" Items="@Roles" LoadInitialData="true" Striped="true" RequestApiOnlyOnce="true" ApiUrl="api/roles" DebounceMilliseconds="150">
+        <MatTableHeader>
+            <th>
+                <MatButton Icon="add" Label="New Role" OnClick="@(() => OpenUpsertRoleDialogAsync())"></MatButton>
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Permissions
+            </th>
+        </MatTableHeader>
+        <MatTableRow Context="roleRow">
+            <td>
+                <div style="width: 155px;">
+                    <MatIconButton Icon="edit" OnClick="@(() => OpenUpsertRoleDialogAsync(roleRow.Name))"></MatIconButton>
+                    <MatIconButton Icon="delete" OnClick="@(() => OpenDeleteDialog(roleRow.Name))"></MatIconButton>
+                </div>
+            </td>
+            <td>
+                <div style="width: 130px;">@roleRow.Name</div>
+            </td>
+            <td>
+                <MatChipSet>
+                    @if (roleRow.Permissions != null && roleRow.Permissions.Any())
+                        {
+                        @foreach (var permission in roleRow.Permissions)
+                            {
+                            <MatChip Label="@permission"></MatChip>
+                            }
+                        }
+                </MatChipSet>
+            </td>
+        </MatTableRow>
+    </MatTable>
+}
+
+<MatDialog @bind-IsOpen="@IsUpsertRoleDialogOpen">
+    <MatDialogTitle>
+        @LabelUpsertDialogTitle
+    </MatDialogTitle>
+    <MatDialogContent>
+        <fieldset>
+            <div class="form-group">
+                <MatTextField @bind-Value="@CurrentRoleName" Disabled="@IsCurrentRoleReadOnly" Label="Role Name" Icon="add"
+                              IconTrailing="true" FullWidth="true" Required="true">
+                </MatTextField>
+            </div>
+        </fieldset>
+        <MatTable Items="@PermissionsSelections" Class="mat-elevation-z5" ShowPaging="false">
+            <MatTableHeader>
+                <th>
+                    Permissions
+                </th>
+                <th>
+                    Allow
+                </th>
+            </MatTableHeader>
+            <MatTableRow>
+                <td>
+                    @context.Name
+                </td>
+                <td>
+                    <MatCheckbox TValue="bool" @bind-Value="@context.IsSelected"></MatCheckbox>
+                </td>
+            </MatTableRow>
+        </MatTable>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { IsUpsertRoleDialogOpen = false; })">
+            Cancel
+        </MatButton>
+        <MatButton OnClick="@UpsertRoleAsync">
+            @LabelUpsertDialogOkButton
+        </MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+<MatDialog @bind-IsOpen="@IsDeleteRoleDialogOpen" Style="z-index: 100">
+    <MatDialogTitle>
+        <MatIcon Icon="warning"></MatIcon>
+        Confirm Delete
+    </MatDialogTitle>
+    <MatDialogContent>
+        Are you sure you want to delete the role "@CurrentRoleName" ?
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { IsDeleteRoleDialogOpen = false; })">
+            Cancel
+        </MatButton>
+        <MatButton OnClick="@DeleteRoleAsync">
+            Delete
+        </MatButton>
+    </MatDialogActions>
+</MatDialog>

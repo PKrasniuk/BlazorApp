@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>8.0</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <Configurations>Debug;Release;DebugCSB</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugCSB|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;ClientSideBlazor</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0-preview3.20168.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0-preview3.20168.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorApp.CommonUI\BlazorApp.CommonUI.csproj" />
+    <ProjectReference Include="..\BlazorApp.Common\BlazorApp.Common.csproj" />
+  </ItemGroup>
+
+</Project>

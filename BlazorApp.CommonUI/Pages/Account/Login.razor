@@ -1,0 +1,76 @@
+﻿@page "/account/login"
+@page "/account/login/{returnurl}"
+
+@layout LoginLayout
+@inherits PageModels.Account.LoginPageModel
+
+<MatCard>
+    <div class="hidden-mdc-down">
+        <MatIconButton Icon="exit_to_app" Class="float-left" @onclick="@GoBack" />
+        <MatIconButton Icon="home" Class="float-left" Link="/" />
+    </div>
+
+    <div class="logo">
+        <a href="/" title="Blazor App Home">
+            <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" title="Blazor App Home" alt="Blazor App" />
+            <br />
+            Blazor App
+        </a>
+        <br />
+        <h4>Log In</h4>
+    </div>
+    <EditForm Model="@LoginParameters" OnValidSubmit="@SubmitLoginAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset>
+            <div class="form-group">
+                <MatTextField id="userName" @bind-Value="@LoginParameters.UserName" Label="User Name" Icon="person"
+                              IconTrailing="true" FullWidth="true" Required="true" tabindex="1">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@LoginParameters.Password" Label="Password" Icon="lock_outline"
+                              IconTrailing="true" FullWidth="true" Required="true" Type="password" tabindex="2">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatButton class="float-right" Type="submit" Raised="true" tabindex="3">
+                    Login
+                </MatButton>
+                <MatCheckbox @bind-Value="@LoginParameters.RememberMe" class="filled-in chk-col-blue">
+                    Remember Me
+                </MatCheckbox>
+            </div>
+            <hr />
+            <div>
+                <MatButton class="float-left" OnClick="@Register" Raised="true">
+                    Create account
+                </MatButton>
+            </div>
+        </fieldset>
+    </EditForm>
+</MatCard>
+<MatAccordion>
+    <MatExpansionPanel @bind-Expanded="@ForgotPasswordToggle">
+        <MatExpansionPanelSummary>
+            <MatExpansionPanelHeader>
+                Forgot Password?
+            </MatExpansionPanelHeader>
+            <MatExpansionPanelSubHeader></MatExpansionPanelSubHeader>
+        </MatExpansionPanelSummary>
+        <MatExpansionPanelDetails>
+            <EditForm Model="@ForgotPasswordParameters" OnValidSubmit="@ForgotPasswordAsync">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <MatTextField @bind-Value="@ForgotPasswordParameters.Email" Label="Email" Icon="mail_outline"
+                                  IconTrailing="true" FullWidth="true" Required="true">
+                    </MatTextField>
+                </div>
+                <div class="form-group">
+                    <MatButton class="float-right" Type="submit" Raised="true">Submit</MatButton>
+                </div>
+            </EditForm>
+        </MatExpansionPanelDetails>
+    </MatExpansionPanel>
+</MatAccordion>

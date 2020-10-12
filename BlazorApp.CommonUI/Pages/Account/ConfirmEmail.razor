@@ -1,0 +1,30 @@
+﻿@page "/account/confirmemail"
+@page "/account/confirmemail/{UserId}"
+
+@layout LoginLayout
+@inherits PageModels.Account.ConfirmEmailPageModel
+
+<MatCard>
+    <div class="logo">
+        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Blazor App" />
+        <br />
+        Blazor App
+        <br />
+        <h4>New User Email Confirmation</h4>
+    </div>
+    <EditForm Model="@ConfirmEmailParameters" OnValidSubmit="@SendConfirmationAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset>
+            <div class="form-group">
+                <MatTextField @bind-Value="@ConfirmEmailParameters.UserId" Label="UserId" Icon="person" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@ConfirmEmailParameters.Token" Label="Token" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <MatButton Type="submit" Raised="true" Disabled="@DisableConfirmButton">Send Confirmation</MatButton>
+            </div>
+        </fieldset>
+    </EditForm>
+</MatCard>

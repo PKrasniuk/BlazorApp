@@ -1,0 +1,84 @@
+﻿@page "/account/profile"
+@page "/account/profile/{UserId}"
+
+@attribute [Authorize]
+@layout MainLayout
+@inherits PageModels.Account.ProfilePageModel
+
+<h1>User Profile</h1>
+<p>User profile management</p>
+
+@if (UserInfo == null)
+{
+    <LoadingBackground ShowLogoBox="true"></LoadingBackground>
+}
+else
+{
+    <MatButton Icon="rotate_right" OnClick="@(() => OpenResetPasswordDialog())" Label="Change Password" Raised="true" class="form-group d-flex justify-content-end">
+    </MatButton>
+    <EditForm Model="@UserInfo" OnValidSubmit="@UpdateUserAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset>
+            <div class="form-group">
+                <MatTextField @bind-Value="@UserInfo.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true" ReadOnly="true">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@UserInfo.Email" Label="Email" Icon="mail_outline" IconTrailing="true" FullWidth="true" Required="true">
+                </MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@UserInfo.FirstName" Label="First Name" FullWidth="true"></MatTextField>
+            </div>
+            <div class="form-group">
+                <MatTextField @bind-Value="@UserInfo.LastName" Label="Last Name" FullWidth="true"></MatTextField>
+            </div>
+            <div class="form-group">
+                <strong>Roles</strong><br />
+                <MatChipSet>
+                    @if (UserInfo.Roles != null && UserInfo.Roles.Any())
+                    {
+                        @foreach (var role in UserInfo.Roles)
+                        {
+                            <MatChip Label="@role"></MatChip>
+                        }
+                    }
+                </MatChipSet>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <MatButton Type="submit" Raised="true">Update Profile</MatButton>
+            </div>
+        </fieldset>
+    </EditForm>
+
+    <MatDialog @bind-IsOpen="@ResetPasswordDialogOpen">
+        <MatDialogTitle>Manual Password Reset for @RegisterParameters.UserName</MatDialogTitle>
+        <MatDialogContent>
+            <EditForm Model="@RegisterParameters" OnValidSubmit="@ResetUserPasswordAsync">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <fieldset>
+                    <div class="form-group">
+                        <MatTextField @bind-Value="@RegisterParameters.Password" Label="Password" Icon="lock_outline"
+                                      IconTrailing="true" FullWidth="true" Required="true" Type="password">
+                        </MatTextField>
+                    </div>
+                    <div class="form-group">
+                        <MatTextField @bind-Value="@RegisterParameters.PasswordConfirm" Label="Password Confirmation" Icon="lock_outline"
+                                      IconTrailing="true" FullWidth="true" Required="true" Type="password">
+                        </MatTextField>
+                    </div>
+                </fieldset>
+            </EditForm>
+        </MatDialogContent>
+        <MatDialogActions>
+            <MatButton OnClick="@(e => { ResetPasswordDialogOpen = false; })">
+                Cancel
+            </MatButton>
+            <MatButton OnClick="@ResetUserPasswordAsync">
+                Reset User Password
+            </MatButton>
+        </MatDialogActions>
+    </MatDialog>
+}

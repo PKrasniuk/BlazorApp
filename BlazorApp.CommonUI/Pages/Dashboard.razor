@@ -1,0 +1,29 @@
+﻿@page "/dashboard"
+
+@attribute [Authorize]
+@layout MainLayout
+@inherits PageModels.DashboardPageModel
+
+<h1>Dashboard</h1>
+<hr />
+<h2>Counter</h2>
+
+<MatFAB icon="exposure_plus_1" @onclick="@IncrementCountAsync"></MatFAB>
+
+<p>
+    Current Page Count: <strong>@CurrentCount</strong>
+    <br />
+    Current User Profile / Persistent Count:
+    <strong>
+        @if (ProfileCurrentCount != -1)
+        {
+            @ProfileCurrentCount
+        }
+    </strong>
+</p>
+
+<p>
+    There is a "User Profile" for persistant user data built into Blazor Boilerplate. This is a bit of hack until Microsoft or others create that functionality.
+    Currently we store Sidebar Navigation settings, Count. In the future I would like to track the users last page but I don't see much for
+    <br />
+</p>
