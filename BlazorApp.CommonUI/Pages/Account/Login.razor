@@ -2,26 +2,26 @@
 @page "/account/login/{returnurl}"
 
 @layout LoginLayout
-@inherits PageModels.Account.LoginPageModel
+@inherits BlazorApp.CommonUI.PageModels.Account.LoginPageModel
 
 <MatCard>
     <div class="hidden-mdc-down">
-        <MatIconButton Icon="exit_to_app" Class="float-left" @onclick="@GoBack" />
-        <MatIconButton Icon="home" Class="float-left" Link="/" />
+        <MatIconButton Icon="exit_to_app" Class="float-left" @onclick="@GoBack"/>
+        <MatIconButton Icon="home" Class="float-left" Link="/"/>
     </div>
 
     <div class="logo">
         <a href="/" title="Blazor App Home">
-            <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" title="Blazor App Home" alt="Blazor App" />
-            <br />
+            <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" title="Blazor App Home" alt="Blazor App"/>
+            <br/>
             Blazor App
         </a>
-        <br />
+        <br/>
         <h4>Log In</h4>
     </div>
     <EditForm Model="@LoginParameters" OnValidSubmit="@SubmitLoginAsync">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
         <fieldset>
             <div class="form-group">
                 <MatTextField id="userName" @bind-Value="@LoginParameters.UserName" Label="User Name" Icon="person"
@@ -41,7 +41,7 @@
                     Remember Me
                 </MatCheckbox>
             </div>
-            <hr />
+            <hr/>
             <div>
                 <MatButton class="float-left" OnClick="@Register" Raised="true">
                     Create account
@@ -60,8 +60,8 @@
         </MatExpansionPanelSummary>
         <MatExpansionPanelDetails>
             <EditForm Model="@ForgotPasswordParameters" OnValidSubmit="@ForgotPasswordAsync">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
                 <div class="form-group">
                     <MatTextField @bind-Value="@ForgotPasswordParameters.Email" Label="Email" Icon="mail_outline"
                                   IconTrailing="true" FullWidth="true" Required="true">

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using BlazorApp.Common.Models.Security;
 using BlazorApp.CommonUI;
 using BlazorApp.CommonUI.Services;
@@ -7,7 +8,6 @@ using MatBlazor;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace BlazorApp.Client

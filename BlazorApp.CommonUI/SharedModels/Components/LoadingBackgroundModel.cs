@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BlazorApp.CommonUI.SharedModels.Components
-{
-    public class LoadingBackgroundModel : ComponentBase
-    {
-        [Parameter] public bool ShowLogoBox { get; set; }
+namespace BlazorApp.CommonUI.SharedModels.Components;
 
-        [Parameter] public RenderFragment ChildContent { get; set; }
-    }
+public class LoadingBackgroundModel : ComponentBase
+{
+    [Parameter] public bool ShowLogoBox { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
 }

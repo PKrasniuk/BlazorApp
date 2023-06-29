@@ -1,6 +1,5 @@
-﻿namespace BlazorApp.Domain.Interfaces
+﻿namespace BlazorApp.Domain.Interfaces;
+
+public interface ISoftDelete
 {
-    public interface ISoftDelete
-    {
-    }
 }

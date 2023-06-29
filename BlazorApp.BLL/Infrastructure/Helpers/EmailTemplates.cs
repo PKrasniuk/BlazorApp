@@ -1,140 +1,139 @@
-﻿using BlazorApp.Common.Models.EmailModels;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
+using BlazorApp.Common.Models.EmailModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
-namespace BlazorApp.BLL.Infrastructure.Helpers
+namespace BlazorApp.BLL.Infrastructure.Helpers;
+
+public static class EmailTemplates
 {
-    public static class EmailTemplates
+    private static IWebHostEnvironment _webHostEnvironment;
+    private static string _logoUrl = string.Empty;
+    private static string _appUrl = string.Empty;
+
+    private static string _plainTextTestEmailTemplate;
+    private static string _newUserConfirmationEmailTemplate;
+    private static string _newUserEmailTemplate;
+    private static string _newUserNotificationEmailTemplate;
+    private static string _passwordResetTemplate;
+    private static string _forgotPasswordTemplate;
+
+    public static void Initialize(IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
     {
-        private static IWebHostEnvironment _webHostEnvironment;
-        private static string _logoUrl = string.Empty;
-        private static string _appUrl = string.Empty;
+        _webHostEnvironment = webHostEnvironment;
+        _logoUrl = configuration["BlazorApp:LogoUrl"];
+        _appUrl = configuration["BlazorApp:ApplicationUrl"];
+    }
 
-        private static string _plainTextTestEmailTemplate;
-        private static string _newUserConfirmationEmailTemplate;
-        private static string _newUserEmailTemplate;
-        private static string _newUserNotificationEmailTemplate;
-        private static string _passwordResetTemplate;
-        private static string _forgotPasswordTemplate;
+    public static EmailMessageModel GetPlainTextTestEmail(this EmailMessageModel emailMessage, DateTime date)
+    {
+        if (_plainTextTestEmailTemplate == null)
+            _plainTextTestEmailTemplate = ReadPhysicalFile("Templates/PlainTextTestEmail.template");
 
-        public static void Initialize(IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
-        {
-            _webHostEnvironment = webHostEnvironment;
-            _logoUrl = configuration["BlazorApp:LogoUrl"];
-            _appUrl = configuration["BlazorApp:ApplicationUrl"];
-        }
+        emailMessage.Body = _plainTextTestEmailTemplate
+            .Replace("{date}", date.ToString(CultureInfo.InvariantCulture));
+        emailMessage.IsHtml = false;
 
-        public static EmailMessageModel GetPlainTextTestEmail(this EmailMessageModel emailMessage, DateTime date)
-        {
-            if (_plainTextTestEmailTemplate == null)
-                _plainTextTestEmailTemplate = ReadPhysicalFile("Templates/PlainTextTestEmail.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _plainTextTestEmailTemplate
-                .Replace("{date}", date.ToString(CultureInfo.InvariantCulture));
-            emailMessage.IsHtml = false;
+    public static EmailMessageModel BuildNewUserConfirmationEmail(this EmailMessageModel emailMessage,
+        string recipientName, string userName, string callbackUrl, string userId, string token)
+    {
+        if (_newUserConfirmationEmailTemplate == null)
+            _newUserConfirmationEmailTemplate = ReadPhysicalFile("Templates/NewUserConfirmationEmail.template");
 
-            return emailMessage;
-        }
+        emailMessage.Body = _newUserConfirmationEmailTemplate
+            .Replace("{logoUrl}", _logoUrl)
+            .Replace("{name}", recipientName)
+            .Replace("{userName}", userName)
+            .Replace("{callbackUrl}", callbackUrl)
+            .Replace("{userId}", userId)
+            .Replace("{token}", token);
+        emailMessage.Subject = $"Welcome {recipientName} to Blazor App";
 
-        public static EmailMessageModel BuildNewUserConfirmationEmail(this EmailMessageModel emailMessage,
-            string recipientName, string userName, string callbackUrl, string userId, string token)
-        {
-            if (_newUserConfirmationEmailTemplate == null)
-                _newUserConfirmationEmailTemplate = ReadPhysicalFile("Templates/NewUserConfirmationEmail.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _newUserConfirmationEmailTemplate
-                .Replace("{logoUrl}", _logoUrl)
-                .Replace("{name}", recipientName)
-                .Replace("{userName}", userName)
-                .Replace("{callbackUrl}", callbackUrl)
-                .Replace("{userId}", userId)
-                .Replace("{token}", token);
-            emailMessage.Subject = $"Welcome {recipientName} to Blazor App";
+    public static EmailMessageModel BuildNewUserEmail(this EmailMessageModel emailMessage, string fullName,
+        string userName, string emailAddress, string password)
+    {
+        if (_newUserEmailTemplate == null)
+            _newUserEmailTemplate = ReadPhysicalFile("Templates/NewUserEmail.template");
 
-            return emailMessage;
-        }
+        emailMessage.Body = _newUserEmailTemplate
+            .Replace("{logoUrl}", _logoUrl)
+            .Replace("{appUrl}", _appUrl)
+            .Replace("{fullName}", fullName)
+            .Replace("{fullName}", userName)
+            .Replace("{userName}", userName)
+            .Replace("{email}", emailAddress)
+            .Replace("{password}", password);
+        emailMessage.Subject = $"Welcome {fullName} to Blazor App";
 
-        public static EmailMessageModel BuildNewUserEmail(this EmailMessageModel emailMessage, string fullName,
-            string userName, string emailAddress, string password)
-        {
-            if (_newUserEmailTemplate == null)
-                _newUserEmailTemplate = ReadPhysicalFile("Templates/NewUserEmail.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _newUserEmailTemplate
-                .Replace("{logoUrl}", _logoUrl)
-                .Replace("{appUrl}", _appUrl)
-                .Replace("{fullName}", fullName)
-                .Replace("{fullName}", userName)
-                .Replace("{userName}", userName)
-                .Replace("{email}", emailAddress)
-                .Replace("{password}", password);
-            emailMessage.Subject = $"Welcome {fullName} to Blazor App";
+    public static EmailMessageModel BuildNewUserNotificationEmail(this EmailMessageModel emailMessage,
+        string creator, string name, string userName, string company, string roles)
+    {
+        if (_newUserNotificationEmailTemplate == null)
+            _newUserNotificationEmailTemplate = ReadPhysicalFile("Templates/NewUserEmail.template");
 
-            return emailMessage;
-        }
+        emailMessage.Body = _newUserNotificationEmailTemplate
+            .Replace("{logoUrl}", _logoUrl)
+            .Replace("{appUrl}", _appUrl)
+            .Replace("{creator}", creator)
+            .Replace("{name}", name)
+            .Replace("{userName}", userName)
+            .Replace("{roles}", roles)
+            .Replace("{company}", company);
+        emailMessage.Subject = $"A new user [{userName}] has registered on Blazor App";
 
-        public static EmailMessageModel BuildNewUserNotificationEmail(this EmailMessageModel emailMessage,
-            string creator, string name, string userName, string company, string roles)
-        {
-            if (_newUserNotificationEmailTemplate == null)
-                _newUserNotificationEmailTemplate = ReadPhysicalFile("Templates/NewUserEmail.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _newUserNotificationEmailTemplate
-                .Replace("{logoUrl}", _logoUrl)
-                .Replace("{appUrl}", _appUrl)
-                .Replace("{creator}", creator)
-                .Replace("{name}", name)
-                .Replace("{userName}", userName)
-                .Replace("{roles}", roles)
-                .Replace("{company}", company);
-            emailMessage.Subject = $"A new user [{userName}] has registered on Blazor App";
+    public static EmailMessageModel BuildPasswordResetEmail(this EmailMessageModel emailMessage, string userName)
+    {
+        if (_passwordResetTemplate == null)
+            _passwordResetTemplate = ReadPhysicalFile("Templates/PasswordReset.template");
 
-            return emailMessage;
-        }
+        emailMessage.Body = _passwordResetTemplate
+            .Replace("{logoUrl}", _logoUrl)
+            .Replace("{userName}", userName);
+        emailMessage.Subject = $"Blazor App Password Reset for {userName}";
 
-        public static EmailMessageModel BuildPasswordResetEmail(this EmailMessageModel emailMessage, string userName)
-        {
-            if (_passwordResetTemplate == null)
-                _passwordResetTemplate = ReadPhysicalFile("Templates/PasswordReset.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _passwordResetTemplate
-                .Replace("{logoUrl}", _logoUrl)
-                .Replace("{userName}", userName);
-            emailMessage.Subject = $"Blazor App Password Reset for {userName}";
+    public static EmailMessageModel BuildForgotPasswordEmail(this EmailMessageModel emailMessage, string name,
+        string callbackUrl, string token)
+    {
+        if (_forgotPasswordTemplate == null)
+            _forgotPasswordTemplate = ReadPhysicalFile("Templates/ForgotPassword.template");
 
-            return emailMessage;
-        }
+        emailMessage.Body = _forgotPasswordTemplate
+            .Replace("{logoUrl}", _logoUrl)
+            .Replace("{name}", name)
+            .Replace("{token}", token)
+            .Replace("{callbackUrl}", callbackUrl);
+        emailMessage.Subject = $"Blazor App Forgot your Password? [{name}]";
 
-        public static EmailMessageModel BuildForgotPasswordEmail(this EmailMessageModel emailMessage, string name,
-            string callbackUrl, string token)
-        {
-            if (_forgotPasswordTemplate == null)
-                _forgotPasswordTemplate = ReadPhysicalFile("Templates/ForgotPassword.template");
+        return emailMessage;
+    }
 
-            emailMessage.Body = _forgotPasswordTemplate
-                .Replace("{logoUrl}", _logoUrl)
-                .Replace("{name}", name)
-                .Replace("{token}", token)
-                .Replace("{callbackUrl}", callbackUrl);
-            emailMessage.Subject = $"Blazor App Forgot your Password? [{name}]";
+    private static string ReadPhysicalFile(string path)
+    {
+        if (_webHostEnvironment == null)
+            throw new InvalidOperationException($"{nameof(EmailTemplates)} is not initialized");
 
-            return emailMessage;
-        }
+        var fileInfo = _webHostEnvironment.ContentRootFileProvider.GetFileInfo(path);
+        if (!fileInfo.Exists) throw new FileNotFoundException($"Template file located at \"{path}\" was not found");
 
-        private static string ReadPhysicalFile(string path)
-        {
-            if (_webHostEnvironment == null)
-                throw new InvalidOperationException($"{nameof(EmailTemplates)} is not initialized");
-
-            var fileInfo = _webHostEnvironment.ContentRootFileProvider.GetFileInfo(path);
-            if (!fileInfo.Exists) throw new FileNotFoundException($"Template file located at \"{path}\" was not found");
-
-            using var fs = fileInfo.CreateReadStream();
-            using var sr = new StreamReader(fs);
-            return sr.ReadToEnd();
-        }
+        using var fs = fileInfo.CreateReadStream();
+        using var sr = new StreamReader(fs);
+        return sr.ReadToEnd();
     }
 }

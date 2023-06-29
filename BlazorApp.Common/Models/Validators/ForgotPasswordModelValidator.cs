@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 
-namespace BlazorApp.Common.Models.Validators
+namespace BlazorApp.Common.Models.Validators;
+
+public class ForgotPasswordModelValidator : AbstractValidator<ForgotPasswordModel>
 {
-    public class ForgotPasswordModelValidator : AbstractValidator<ForgotPasswordModel>
+    public ForgotPasswordModelValidator()
     {
-        public ForgotPasswordModelValidator()
-        {
-            RuleFor(x => x.Email).NotNull().NotEmpty().EmailAddress();
-        }
+        RuleFor(x => x.Email).NotNull().NotEmpty().EmailAddress();
     }
 }

@@ -2,7 +2,7 @@
 
 @attribute [Authorize]
 @layout MainLayout
-@inherits PageModels.Admin.RolesPageModel
+@inherits BlazorApp.CommonUI.PageModels.Admin.RolesPageModel
 
 <h1>Roles</h1>
 <p>Roles Management</p>
@@ -40,12 +40,12 @@ else
             <td>
                 <MatChipSet>
                     @if (roleRow.Permissions != null && roleRow.Permissions.Any())
-                        {
+                    {
                         @foreach (var permission in roleRow.Permissions)
-                            {
+                        {
                             <MatChip Label="@permission"></MatChip>
-                            }
                         }
+                    }
                 </MatChipSet>
             </td>
         </MatTableRow>

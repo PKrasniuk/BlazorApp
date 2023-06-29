@@ -1,4 +1,4 @@
-﻿@inherits SharedModels.Layouts.MainLayoutModel
+﻿@inherits BlazorApp.CommonUI.SharedModels.Layouts.MainLayoutModel
 
 <MatDrawerContainer Style="height: 100vh; width: 100vw;" Class="@BbDrawerClass">
     <MatDrawer Opened="@NavMenuOpened">
@@ -7,9 +7,9 @@
                 <img alt="Blazor App" class="logo-img" src="_content/BlazorApp.CommonUI/images/blazorboilerplate-dark.svg" title="Blazor App">
                 <a class="miniHover" href="/">Blazor App</a>
             </div>
-            <UserProfile />
+            <UserProfile/>
         </header>
-        <NavMenu />
+        <NavMenu/>
         <footer class="drawer-footer">
         </footer>
     </MatDrawer>

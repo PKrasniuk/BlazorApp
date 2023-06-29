@@ -1,7 +1,6 @@
-﻿namespace BlazorApp.Common.Models
+﻿namespace BlazorApp.Common.Models;
+
+public class ForgotPasswordModel
 {
-    public class ForgotPasswordModel
-    {
-        public string Email { get; set; }
-    }
+    public string Email { get; set; }
 }

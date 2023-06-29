@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace BlazorApp.Common.Interfaces
+namespace BlazorApp.Common.Interfaces;
+
+public interface IUserSession<T>
 {
-    public interface IUserSession<T>
-    {
-        T UserId { get; set; }
+    T UserId { get; set; }
 
-        List<string> Roles { get; set; }
+    List<string> Roles { get; set; }
 
-        string UserName { get; set; }
-    }
+    string UserName { get; set; }
 }

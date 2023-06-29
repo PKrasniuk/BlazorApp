@@ -1,29 +1,27 @@
-﻿using BlazorApp.CommonUI.Services;
+﻿using System.Threading.Tasks;
+using BlazorApp.CommonUI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
-namespace BlazorApp.CommonUI.PageModels
+namespace BlazorApp.CommonUI.PageModels;
+
+[Authorize]
+public class DashboardPageModel : ComponentBase
 {
-    [Authorize]
-    public class DashboardPageModel : ComponentBase
+    protected int ProfileCurrentCount = -1;
+    [Inject] private AppState AppState { get; set; }
+
+    protected int CurrentCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
-        [Inject] private AppState AppState { get; set; }
+        ProfileCurrentCount = await AppState.GetUserProfileCount();
+    }
 
-        protected int CurrentCount { get; set; }
-
-        protected int ProfileCurrentCount = -1;
-
-        protected override async Task OnInitializedAsync()
-        {
-            ProfileCurrentCount = await AppState.GetUserProfileCount();
-        }
-
-        protected async Task IncrementCountAsync()
-        {
-            CurrentCount++;
-            ProfileCurrentCount++;
-            await AppState.UpdateUserProfileCount(ProfileCurrentCount);
-        }
+    protected async Task IncrementCountAsync()
+    {
+        CurrentCount++;
+        ProfileCurrentCount++;
+        await AppState.UpdateUserProfileCount(ProfileCurrentCount);
     }
 }

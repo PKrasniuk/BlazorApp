@@ -1,17 +1,16 @@
-﻿using BlazorApp.Common.Models;
+﻿using System.Threading.Tasks;
+using BlazorApp.Common.Models;
 using BlazorApp.Common.Wrappers;
-using System.Threading.Tasks;
 
-namespace BlazorApp.BLL.Interfaces
+namespace BlazorApp.BLL.Interfaces;
+
+public interface IUserProfileManager
 {
-    public interface IUserProfileManager
-    {
-        Task<ApiResponse> GetUserProfileAsync();
+    Task<ApiResponse> GetUserProfileAsync();
 
-        Task<ApiResponse> GetUserProfileAsync(string userId);
+    Task<ApiResponse> GetUserProfileAsync(string userId);
 
-        Task<ApiResponse> UpsertUserProfileAsync(UserProfileModel userProfile);
+    Task<ApiResponse> UpsertUserProfileAsync(UserProfileModel userProfile);
 
-        Task<ApiResponse> GetLastPageVisitedAsync(string userName);
-    }
+    Task<ApiResponse> GetLastPageVisitedAsync(string userName);
 }

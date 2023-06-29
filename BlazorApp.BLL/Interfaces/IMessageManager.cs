@@ -1,15 +1,14 @@
-﻿using BlazorApp.Common.Models;
+﻿using System.Threading.Tasks;
+using BlazorApp.Common.Models;
 using BlazorApp.Common.Wrappers;
-using System.Threading.Tasks;
 
-namespace BlazorApp.BLL.Interfaces
+namespace BlazorApp.BLL.Interfaces;
+
+public interface IMessageManager
 {
-    public interface IMessageManager
-    {
-        Task<ApiResponse> CreateMessageAsync(MessageModel messageModel);
+    Task<ApiResponse> CreateMessageAsync(MessageModel messageModel);
 
-        Task<ApiResponse> GetMessagesAsync();
+    Task<ApiResponse> GetMessagesAsync();
 
-        Task<ApiResponse> DeleteMessageAsync(string id);
-    }
+    Task<ApiResponse> DeleteMessageAsync(string id);
 }

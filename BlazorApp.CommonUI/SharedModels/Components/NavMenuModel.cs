@@ -1,30 +1,26 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Threading.Tasks;
 
-namespace BlazorApp.CommonUI.SharedModels.Components
+namespace BlazorApp.CommonUI.SharedModels.Components;
+
+public class NavMenuModel : ComponentBase
 {
-    public class NavMenuModel : ComponentBase
+    [Inject] public NavigationManager NavigationManager { get; set; }
+
+    [CascadingParameter] private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    protected bool IsLoggedIn { get; set; }
+
+    protected override async Task OnParametersSetAsync()
     {
-        [Inject] public NavigationManager NavigationManager { get; set; }
+        IsLoggedIn = false;
 
-        [CascadingParameter] private Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
-        protected bool IsLoggedIn { get; set; }
-
-        protected override async Task OnParametersSetAsync()
+        var authenticationState = await AuthenticationStateTask;
+        if (authenticationState != null)
         {
-            IsLoggedIn = false;
-
-            var authenticationState = await AuthenticationStateTask;
-            if (authenticationState != null)
-            {
-                var user = authenticationState.User;
-                if (user.Identity.IsAuthenticated)
-                {
-                    IsLoggedIn = true;
-                }
-            }
+            var user = authenticationState.User;
+            if (user.Identity.IsAuthenticated) IsLoggedIn = true;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@page "/todo_list"
 
 @layout MainLayout
-@inherits PageModels.TodoListPageModel
+@inherits BlazorApp.CommonUI.PageModels.TodoListPageModel
 
 <h1>
     Todo List - CRUD
@@ -48,8 +48,8 @@
     <MatDialogTitle>Create Todo</MatDialogTitle>
     <MatDialogContent>
         <EditForm Model="@Todo" OnValidSubmit="@CreateAsync">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <fieldset>
                 <div class="form-group">
                     <MatTextField @bind-Value="@Todo.Title" Label="Title" Icon="title" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>

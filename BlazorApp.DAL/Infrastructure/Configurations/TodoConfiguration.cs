@@ -1,23 +1,22 @@
-﻿using BlazorApp.Common.Constants;
+﻿using System;
+using BlazorApp.Common.Constants;
 using BlazorApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
-namespace BlazorApp.DAL.Infrastructure.Configurations
+namespace BlazorApp.DAL.Infrastructure.Configurations;
+
+internal class TodoConfiguration : IEntityTypeConfiguration<Todo<Guid>>
 {
-    internal class TodoConfiguration : IEntityTypeConfiguration<Todo<Guid>>
+    public void Configure(EntityTypeBuilder<Todo<Guid>> builder)
     {
-        public void Configure(EntityTypeBuilder<Todo<Guid>> builder)
-        {
-            builder.ToTable("Todos");
+        builder.ToTable("Todos");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.RowVersion).IsRowVersion();
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.RowVersion).IsRowVersion();
 
-            builder.Property(x => x.Title).IsRequired().HasMaxLength(FieldConstants.HalfFieldLength);
-            builder.Property(x => x.IsCompleted).IsRequired().HasDefaultValue(false);
-        }
+        builder.Property(x => x.Title).IsRequired().HasMaxLength(FieldConstants.HalfFieldLength);
+        builder.Property(x => x.IsCompleted).IsRequired().HasDefaultValue(false);
     }
 }

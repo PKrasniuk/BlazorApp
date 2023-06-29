@@ -1,7 +1,7 @@
 ﻿@page "/forum"
 
 @layout MainLayout
-@inherits PageModels.Forum.ForumPageModel
+@inherits BlazorApp.CommonUI.PageModels.Forum.ForumPageModel
 
 <AuthorizeView Context="AuthorizeContext">
     <NotAuthorized>
@@ -16,7 +16,7 @@
 
 <AuthorizeView Context="AuthorizeContext">
     <Authorized>
-        <ForumMessageCreateForm Send="Send" />
+        <ForumMessageCreateForm Send="Send"/>
 
         <MatList SingleSelection="true" TwoLine="true">
             @if (Messages == null || Messages.Count == 0)
@@ -31,7 +31,7 @@
             {
                 @foreach (var message in Messages)
                 {
-                    <ForumMessage Delete="Delete" Message="@message" />
+                    <ForumMessage Delete="Delete" Message="@message"/>
                 }
             }
         </MatList>

@@ -1,29 +1,28 @@
-﻿using BlazorApp.Common.Models;
+﻿using System.Threading.Tasks;
+using BlazorApp.Common.Models;
 using BlazorApp.Common.Wrappers;
-using System.Threading.Tasks;
 
-namespace BlazorApp.CommonUI.Services.Contracts
+namespace BlazorApp.CommonUI.Services.Contracts;
+
+public interface IAuthorizeApi
 {
-    public interface IAuthorizeApi
-    {
-        Task<ApiResponse> LoginAsync(LoginModel model);
+    Task<ApiResponse> LoginAsync(LoginModel model);
 
-        Task<ApiResponse> CreateAsync(RegisterModel model);
+    Task<ApiResponse> CreateAsync(RegisterModel model);
 
-        Task<ApiResponse> RegisterAsync(RegisterModel model);
+    Task<ApiResponse> RegisterAsync(RegisterModel model);
 
-        Task<ApiResponse> ForgotPasswordAsync(ForgotPasswordModel model);
+    Task<ApiResponse> ForgotPasswordAsync(ForgotPasswordModel model);
 
-        Task<ApiResponse> ResetPasswordAsync(ResetPasswordModel model);
+    Task<ApiResponse> ResetPasswordAsync(ResetPasswordModel model);
 
-        Task<ApiResponse> LogoutAsync();
+    Task<ApiResponse> LogoutAsync();
 
-        Task<ApiResponse> ConfirmEmailAsync(ConfirmEmailModel model);
+    Task<ApiResponse> ConfirmEmailAsync(ConfirmEmailModel model);
 
-        Task<UserInfoModel> GetUserInfoAsync();
+    Task<UserInfoModel> GetUserInfoAsync();
 
-        Task<ApiResponse> UpdateUserAsync(UserInfoModel model);
+    Task<ApiResponse> UpdateUserAsync(UserInfoModel model);
 
-        Task<UserInfoModel> GetUserAsync();
-    }
+    Task<UserInfoModel> GetUserAsync();
 }

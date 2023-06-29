@@ -1,41 +1,40 @@
-﻿namespace BlazorApp.Common.Interfaces
+﻿namespace BlazorApp.Common.Interfaces;
+
+public interface IEmailConfiguration
 {
-    public interface IEmailConfiguration
-    {
-        string SmtpServer { get; }
+    string SmtpServer { get; }
 
-        int SmtpPort { get; }
+    int SmtpPort { get; }
 
-        string SmtpUsername { get; set; }
+    string SmtpUsername { get; set; }
 
-        string SmtpPassword { get; set; }
+    string SmtpPassword { get; set; }
 
-        bool SmtpUseSSL { get; set; }
+    bool SmtpUseSSL { get; set; }
 
-        string FromName { get; set; }
+    string FromName { get; set; }
 
-        string FromAddress { get; set; }
+    string FromAddress { get; set; }
 
-        string ReplyToAddress { get; set; }
+    string ReplyToAddress { get; set; }
 
-        string PopServer { get; }
+    string PopServer { get; }
 
-        int PopPort { get; }
+    int PopPort { get; }
 
-        string PopUsername { get; }
+    string PopUsername { get; }
 
-        string PopPassword { get; }
+    string PopPassword { get; }
 
-        bool PopUseSSL { get; }
+    bool PopUseSSL { get; }
 
-        string ImapServer { get; set; }
+    string ImapServer { get; set; }
 
-        int ImapPort { get; set; }
+    int ImapPort { get; set; }
 
-        string ImapUsername { get; set; }
+    string ImapUsername { get; set; }
 
-        string ImapPassword { get; set; }
+    string ImapPassword { get; set; }
 
-        bool ImapUseSSL { get; set; }
-    }
+    bool ImapUseSSL { get; set; }
 }

@@ -2,11 +2,11 @@
 
 @attribute [Authorize(Policy = Policies.IsAdmin)]
 @layout MainLayout
-@inherits PageModels.Admin.DbLogPageModel
+@inherits BlazorApp.CommonUI.PageModels.Admin.DbLogPageModel
 
 <h1>Serilog Database Log Viewer</h1>
 <p>
-    Secured Page.<br />
+    Secured Page.<br/>
     Paginated viewing and fetching of system logs from the database.
 </p>
 
@@ -19,13 +19,13 @@
 else
 {
     <div class="row" style="margin-left: 0;">
-        <RefreshTimer StartEnabled="true" ElapsedEvent="@(async (_, __) => await LoadData())" />
+        <RefreshTimer StartEnabled="true" ElapsedEvent="@(async (_, __) => await LoadData())"/>
     </div>
     <MatTable Items="@DbLogItems" Class="mat-elevation-z5" Striped="true" PageSize="@PageSize" ShowPaging="false">
         <MatTableHeader>
             <th>
                 <div style="width: 175px;">
-                    <MatFAB Mini="true" Class="@($"{MatfabAnimateClass}")" Icon="refresh" OnClick="@LoadData" Raised="true" Style="margin-right: 16px;" />
+                    <MatFAB Mini="true" Class="@($"{MatfabAnimateClass}")" Icon="refresh" OnClick="@LoadData" Raised="true" Style="margin-right: 16px;"/>
                     Timestamp
                 </div>
             </th>
@@ -35,7 +35,7 @@ else
             <th>
                 Log Message
             </th>
-            <th style="min-width: 400px; max-width: 800px;">
+            <th style="max-width: 800px; min-width: 400px;">
                 Exception (if any)
             </th>
             <th>
@@ -58,24 +58,24 @@ else
                     @context.Message
                 </span>
             </td>
-            <td style="min-width: 400px; max-width: 800px;">
+            <td style="max-width: 800px; min-width: 400px;">
                 <span style="font-size: small">
                     @context.Exception?.ToString()
                 </span>
             </td>
             <td>
                 @if (context.LogProperties?.Any() ?? false)
-                    {
+                {
                     <ul>
                         @foreach (var propertyPair in context.LogProperties)
-                            {
-                            <li style="font-size:small">@($"{propertyPair.Key}:  {propertyPair.Value}")</li>
-                            }
+                        {
+                            <li style="font-size: small">@($"{propertyPair.Key}:  {propertyPair.Value}")</li>
+                        }
                     </ul>
-                    }
+                }
             </td>
         </MatTableRow>
     </MatTable>
-    <MatPaginator PageSize="@PageSize" Page="@(async a=> await OnPage(a))" Length="@LogCountTotal" Style="background: transparent">
+    <MatPaginator PageSize="@PageSize" Page="@(async a => await OnPage(a))" Length="@LogCountTotal" Style="background: transparent">
     </MatPaginator>
 }

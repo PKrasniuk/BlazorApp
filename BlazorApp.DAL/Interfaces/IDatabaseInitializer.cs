@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace BlazorApp.DAL.Interfaces
+namespace BlazorApp.DAL.Interfaces;
+
+public interface IDatabaseInitializer
 {
-    public interface IDatabaseInitializer
-    {
-        Task SeedAsync();
-    }
+    Task SeedAsync();
 }

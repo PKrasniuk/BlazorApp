@@ -1,9 +1,9 @@
-﻿@inherits SharedModels.Components.RefreshTimerModel
+﻿@inherits BlazorApp.CommonUI.SharedModels.Components.RefreshTimerModel
 
 <div class="refresh-timer row">
     <div>@Label</div>
     <div>
-        <MatSlideToggle @bind-Value="@TimerInterval.Enabled" />
+        <MatSlideToggle @bind-Value="@TimerInterval.Enabled"/>
     </div>
     <div class="refresh-timer-interval-wrapper">
         <MatNumericUpDownField Label="@Text"

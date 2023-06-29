@@ -1,9 +1,8 @@
-﻿namespace BlazorApp.Common.Constants
-{
-    public static class RoleConstants
-    {
-        public const string AdminRoleName = "Administrator";
+﻿namespace BlazorApp.Common.Constants;
 
-        public const string UserRoleName = "User";
-    }
+public static class RoleConstants
+{
+    public const string AdminRoleName = "Administrator";
+
+    public const string UserRoleName = "User";
 }

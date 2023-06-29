@@ -2,19 +2,19 @@
 @page "/account/confirmemail/{UserId}"
 
 @layout LoginLayout
-@inherits PageModels.Account.ConfirmEmailPageModel
+@inherits BlazorApp.CommonUI.PageModels.Account.ConfirmEmailPageModel
 
 <MatCard>
     <div class="logo">
-        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Blazor App" />
-        <br />
+        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Blazor App"/>
+        <br/>
         Blazor App
-        <br />
+        <br/>
         <h4>New User Email Confirmation</h4>
     </div>
     <EditForm Model="@ConfirmEmailParameters" OnValidSubmit="@SendConfirmationAsync">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
         <fieldset>
             <div class="form-group">
                 <MatTextField @bind-Value="@ConfirmEmailParameters.UserId" Label="UserId" Icon="person" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>

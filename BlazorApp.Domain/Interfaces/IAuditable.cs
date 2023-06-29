@@ -1,6 +1,5 @@
-﻿namespace BlazorApp.Domain.Interfaces
+﻿namespace BlazorApp.Domain.Interfaces;
+
+public interface IAuditable
 {
-    public interface IAuditable
-    {
-    }
 }

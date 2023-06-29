@@ -1,4 +1,4 @@
-﻿@inherits SharedModels.Components.LoadingBackgroundModel
+﻿@inherits BlazorApp.CommonUI.SharedModels.Components.LoadingBackgroundModel
 
 <div class="triangle-container">
     <div class="triangles">
@@ -8,8 +8,8 @@
 @if (ShowLogoBox)
 {
     <div class="loading-container">
-        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Logo" />
-        <br />
+        <img src="_content/BlazorApp.CommonUI/images/blazorboilerplate.svg" style="width: 100px;" alt="Logo"/>
+        <br/>
         @ChildContent
     </div>
 }

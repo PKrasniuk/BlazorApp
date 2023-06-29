@@ -2,7 +2,7 @@
 
 @attribute [Authorize]
 @layout MainLayout
-@inherits PageModels.Admin.UsersPageModel
+@inherits BlazorApp.CommonUI.PageModels.Admin.UsersPageModel
 
 <h1>Users</h1>
 <p>User Management</p>
@@ -64,12 +64,12 @@ else
             <td>
                 <MatChipSet>
                     @if (userRow.Roles != null && userRow.Roles.Any())
-                        {
+                    {
                         @foreach (var role in userRow.Roles)
-                            {
+                        {
                             <MatChip Label="@role"></MatChip>
-                            }
                         }
+                    }
                 </MatChipSet>
             </td>
         </MatTableRow>
@@ -80,8 +80,8 @@ else
     <MatDialogTitle>Create User</MatDialogTitle>
     <MatDialogContent>
         <EditForm Model="@RegisterParameters" OnValidSubmit="@CreateUserAsync">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <fieldset>
                 <div class="form-group">
                     <MatTextField @bind-Value="@RegisterParameters.UserName" Label="User Name" Icon="person"
@@ -120,8 +120,8 @@ else
     <MatDialogTitle>Edit User</MatDialogTitle>
     <MatDialogContent>
         <EditForm Model="@User" OnValidSubmit="@UpdateUserAsync">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <fieldset>
                 <div class="form-group">
                     <MatTextField @bind-Value="@User.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
@@ -132,7 +132,7 @@ else
                 <MatChipSet>
                     @foreach (var role in RoleSelections.OrderBy(x => x.Name))
                     {
-                        <MatChip Label="@role.Name" LeadingIcon="@(role.IsSelected ? "done" : "")" @onclick="@(() => UpdateUserRole(role))" />
+                        <MatChip Label="@role.Name" LeadingIcon="@(role.IsSelected ? "done" : "")" @onclick="@(() => UpdateUserRole(role))"/>
                     }
                 </MatChipSet>
             </fieldset>
@@ -170,8 +170,8 @@ else
     <MatDialogTitle>Manual Password Reset for @RegisterParameters.UserName</MatDialogTitle>
     <MatDialogContent>
         <EditForm Model="@RegisterParameters" OnValidSubmit="@ResetUserPasswordAsync">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <fieldset>
                 <div class="form-group">
                     <MatTextField @bind-Value="@RegisterParameters.Password" Label="Password" Icon="lock_outline"
