@@ -32,7 +32,7 @@ public class TodoManager : ITodoManager
 
     public async Task<ApiResponse> GetTodoAsync(string id)
     {
-        var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == Guid.Parse((ReadOnlySpan<char>)id));
+        var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == Guid.Parse(id));
         return todo != null
             ? new ApiResponse(StatusCodes.Status200OK, "Retrieved Todo", _mapper.Map<TodoModel>(todo))
             : new ApiResponse(StatusCodes.Status400BadRequest, "Failed to Retrieve Todo");
@@ -50,7 +50,7 @@ public class TodoManager : ITodoManager
 
     public async Task<ApiResponse> UpdateTodoAsync(TodoModel todo)
     {
-        var dbTodo = _db.Todos.FirstOrDefault(t => t.Id == Guid.Parse((ReadOnlySpan<char>)todo.Id));
+        var dbTodo = _db.Todos.FirstOrDefault(t => t.Id == Guid.Parse(todo.Id));
         if (dbTodo != null)
         {
             dbTodo.Title = todo.Title;
@@ -66,7 +66,7 @@ public class TodoManager : ITodoManager
 
     public async Task<ApiResponse> DeleteTodoAsync(string id)
     {
-        var dbTodo = _db.Todos.FirstOrDefault(t => t.Id == Guid.Parse((ReadOnlySpan<char>)id));
+        var dbTodo = _db.Todos.FirstOrDefault(t => t.Id == Guid.Parse(id));
         if (dbTodo != null)
         {
             _db.Todos.Remove(dbTodo);

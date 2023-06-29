@@ -52,7 +52,7 @@ public class ApiLogManager : IApiLogManager
     {
         return new ApiResponse(StatusCodes.Status200OK, "Retrieved Api Log",
             _mapper.Map<List<ApiLogItemModel>>(await _db.ApiLogs
-                .Where(a => a.ApplicationUserId == Guid.Parse((ReadOnlySpan<char>)applicationUserId))
+                .Where(a => a.ApplicationUserId == Guid.Parse(applicationUserId))
                 .ToListAsync()));
     }
 }

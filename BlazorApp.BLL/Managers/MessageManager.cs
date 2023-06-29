@@ -42,7 +42,7 @@ public class MessageManager : IMessageManager
 
     public async Task<ApiResponse> DeleteMessageAsync(string id)
     {
-        var dbMessage = _db.Messages.FirstOrDefault(m => m.Id == Guid.Parse((ReadOnlySpan<char>)id));
+        var dbMessage = _db.Messages.FirstOrDefault(m => m.Id == Guid.Parse(id));
         if (dbMessage != null)
         {
             _db.Messages.Remove(dbMessage);

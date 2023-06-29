@@ -22,6 +22,6 @@ public class MappingProfile : Profile
 
         CreateMap<Guid, string>().ConvertUsing(o => o == Guid.Empty ? null : o.ToString());
         CreateMap<string, Guid>()
-            .ConvertUsing(s => !string.IsNullOrEmpty(s) ? Guid.Parse((ReadOnlySpan<char>)s) : Guid.Empty);
+            .ConvertUsing(s => !string.IsNullOrEmpty(s) ? Guid.Parse(s) : Guid.Empty);
     }
 }
