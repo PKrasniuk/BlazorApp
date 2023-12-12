@@ -10,7 +10,6 @@ using BlazorApp.Common.Wrappers;
 using MatBlazor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorApp.CommonUI.PageModels.Admin;
@@ -151,7 +150,7 @@ public class RolesPageModel : ComponentBase
         try
         {
             var response = await Http.DeleteAsync($"api/Admin/Role/{CurrentRoleName}");
-            if (response.StatusCode != (HttpStatusCode)StatusCodes.Status200OK)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 MatToaster.Add("Role Delete Failed", MatToastType.Danger);
                 return;
@@ -176,7 +175,7 @@ public class RolesPageModel : ComponentBase
                 await Http.GetFromJsonAsync<ApiResponse>(
                     $"api/Admin/Roles?pageSize={PageSize}&pageNumber={CurrentPage}");
 
-            if (apiResponse.StatusCode == StatusCodes.Status200OK)
+            if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
             {
                 MatToaster.Add(apiResponse.Message, MatToastType.Success, "Roles Retrieved");
                 Roles = JsonConvert.DeserializeObject<RoleModel[]>(apiResponse.Result.ToString()).ToList();

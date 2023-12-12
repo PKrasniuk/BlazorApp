@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ using BlazorApp.Common.Wrappers;
 using MatBlazor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorApp.CommonUI.PageModels.Admin;
@@ -53,7 +53,7 @@ public class DbLogPageModel : ComponentBase
 
         switch (ApiResponse.StatusCode)
         {
-            case StatusCodes.Status200OK:
+            case (int)HttpStatusCode.OK:
             {
                 var nextPage = JsonConvert
                     .DeserializeObject<DbLogModel[]>(ApiResponse.Result.ToString()).ToList();
@@ -61,7 +61,7 @@ public class DbLogPageModel : ComponentBase
                 DbLogItems = nextPage;
                 break;
             }
-            case StatusCodes.Status204NoContent:
+            case (int)HttpStatusCode.NoContent:
                 MatToaster.Add(string.Empty, MatToastType.Info, "No more logs to fetch");
                 break;
             default:

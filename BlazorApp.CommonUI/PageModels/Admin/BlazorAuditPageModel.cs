@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using BlazorApp.Common.Models;
 using BlazorApp.Common.Wrappers;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorApp.CommonUI.PageModels.Admin;
@@ -29,7 +29,7 @@ public class BlazorAuditPageModel : ComponentBase
     {
         var apiResponse = await Http.GetFromJsonAsync<ApiResponse>("api/apilog");
 
-        if (apiResponse.StatusCode == StatusCodes.Status200OK)
+        if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
         {
             MatToaster.Add(apiResponse.Message, MatToastType.Success, "Api Log Items Retrieved");
             ApiLogItems = JsonConvert.DeserializeObject<ApiLogItemModel[]>(apiResponse.Result.ToString()).ToList();

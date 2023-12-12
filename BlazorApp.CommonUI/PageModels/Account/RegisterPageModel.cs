@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using BlazorApp.Common.Models;
 using BlazorApp.CommonUI.Services.Implementations;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 
 namespace BlazorApp.CommonUI.PageModels.Account;
 
@@ -25,7 +25,7 @@ public class RegisterPageModel : ComponentBase
         {
             var response =
                 await ((IdentityAuthenticationStateProvider)AuthStateProvider).Register(RegisterParameters);
-            if (response.StatusCode == StatusCodes.Status200OK)
+            if (response.StatusCode == (int)HttpStatusCode.OK)
             {
                 MatToaster.Add($"New User Email Verification was sent to: {RegisterParameters.Email}",
                     MatToastType.Success, "User Creation Successful");

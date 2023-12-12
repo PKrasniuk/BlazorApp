@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using BlazorApp.Common.Constants;
 using BlazorApp.Common.Models;
@@ -6,7 +7,6 @@ using BlazorApp.CommonUI.Services.Implementations;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.JSInterop;
 
 namespace BlazorApp.CommonUI.PageModels.Account;
@@ -63,7 +63,7 @@ public class LoginPageModel : ComponentBase
         try
         {
             var response = await ((IdentityAuthenticationStateProvider)AuthStateProvider).Login(LoginParameters);
-            if (response.StatusCode == StatusCodes.Status200OK)
+            if (response.StatusCode == (int)HttpStatusCode.OK)
                 NavigateTo = response.Result != null ? (string)response.Result : CommonConstants.DefaultPageVisited;
             else
                 MatToaster.Add(response.Message, MatToastType.Danger, "Login Attempt Failed");

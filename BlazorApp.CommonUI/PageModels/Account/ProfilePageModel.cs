@@ -9,7 +9,6 @@ using MatBlazor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 
 namespace BlazorApp.CommonUI.PageModels.Account;
 
@@ -65,7 +64,7 @@ public class ProfilePageModel : ComponentBase
         try
         {
             var apiResponse = await ((IdentityAuthenticationStateProvider)AuthStateProvider).UpdateUser(UserInfo);
-            if (apiResponse.StatusCode == StatusCodes.Status200OK)
+            if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
                 MatToaster.Add("Profile update was Successful", MatToastType.Success);
             else
                 MatToaster.Add(apiResponse.Message, MatToastType.Danger, "Profile Update Failed");

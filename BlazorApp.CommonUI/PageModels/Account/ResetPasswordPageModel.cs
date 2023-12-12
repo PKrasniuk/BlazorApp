@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using BlazorApp.Common.Models;
 using BlazorApp.CommonUI.Services.Implementations;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 
 namespace BlazorApp.CommonUI.PageModels.Account;
 
@@ -45,7 +45,7 @@ public class ResetPasswordPageModel : ComponentBase
             var apiResponse =
                 await ((IdentityAuthenticationStateProvider)AuthStateProvider).ResetPassword(
                     ResetPasswordParameters);
-            if (apiResponse.StatusCode == StatusCodes.Status200OK)
+            if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
             {
                 MatToaster.Add("Reset Password was Successful", MatToastType.Success);
                 NavigationManager.NavigateTo("/account/login");

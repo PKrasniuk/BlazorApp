@@ -9,7 +9,6 @@ using BlazorApp.Common.Models;
 using BlazorApp.Common.Wrappers;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorApp.CommonUI.PageModels;
@@ -36,7 +35,7 @@ public class TodoListPageModel : ComponentBase
     private async Task ReadAsync()
     {
         var apiResponse = await Http.GetFromJsonAsync<ApiResponse>("api/todo");
-        if (apiResponse.StatusCode == StatusCodes.Status200OK)
+        if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
         {
             MatToaster.Add(apiResponse.Message, MatToastType.Success, "Todo List Retrieved");
             TodoModelList = JsonConvert
@@ -80,7 +79,7 @@ public class TodoListPageModel : ComponentBase
         try
         {
             var response = await Http.DeleteAsync("api/todo/" + Todo.Id);
-            if (response.StatusCode == (HttpStatusCode)StatusCodes.Status200OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 MatToaster.Add("Todo Deleted", MatToastType.Success);
                 TodoModelList.Remove(Todo);

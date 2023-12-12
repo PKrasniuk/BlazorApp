@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using BlazorApp.Common.Models;
 using BlazorApp.CommonUI.Services.Contracts;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace BlazorApp.CommonUI.Services;
@@ -37,7 +37,7 @@ public class AppState
         if (UserProfile != null && !string.IsNullOrEmpty(UserProfile.UserId)) return UserProfile;
 
         var apiResponse = await _userProfileApi.GetUserProfilesAsync();
-        return apiResponse.StatusCode == StatusCodes.Status200OK
+        return apiResponse.StatusCode == (int)HttpStatusCode.OK
             ? JsonConvert.DeserializeObject<UserProfileModel>(apiResponse.Result.ToString())
             : new UserProfileModel();
     }
