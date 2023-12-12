@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using Serilog.Debugging;
 
 namespace BlazorApp;
@@ -58,6 +59,8 @@ public class Startup
 
         app.UseMiddleware<ApiResponseRequestLoggingMiddleware>(
             Convert.ToBoolean(Configuration["BlazorApp:APILogging:Enabled"] ?? "true"));
+
+        app.UseSerilogRequestLogging();
 
         if (env.IsDevelopment())
         {

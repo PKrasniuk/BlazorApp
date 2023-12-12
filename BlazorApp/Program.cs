@@ -43,7 +43,7 @@ public class Program
         return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
         {
             webBuilder.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
-                .UseStartup<Startup>().UseSerilog();
+                .UseStartup<Startup>();
         });
     }
 }

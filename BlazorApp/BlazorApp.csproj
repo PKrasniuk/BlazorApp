@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <UserSecretsId>ec572aea-4a6f-4b13-a582-c15799999067</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
@@ -9,18 +9,16 @@
 
   <ItemGroup>
     <PackageReference Include="MatBlazor" Version="2.10.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.14" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8" />
-    <PackageReference Include="Serilog" Version="3.0.1" />
-    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
-    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="13.2.0" />
+    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="14.0.0" />
   </ItemGroup>
 
   <ItemGroup>
