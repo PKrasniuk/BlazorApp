@@ -6,8 +6,8 @@ using BlazorApp.Common.Models.Security;
 using BlazorApp.DAL;
 using BlazorApp.DAL.Interfaces;
 using BlazorApp.Domain.Entities;
+using Duende.IdentityServer.EntityFramework.DbContexts;
 using IdentityServer4.AccessTokenValidation;
-using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +24,7 @@ public static partial class ConfigurationExtension
     public static IServiceCollection AddBaseConfiguration(this IServiceCollection services,
         IConfiguration configuration, IWebHostEnvironment environment)
     {
-        var authAuthority = configuration["BlazorApp:IS4ApplicationUrl"].TrimEnd('/');
+        var authAuthority = configuration["BlazorApp:IS4ApplicationUrl"]?.TrimEnd('/');
 
         void DbContextOptionsBuilder(DbContextOptionsBuilder builder)
         {

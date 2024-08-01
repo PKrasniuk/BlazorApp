@@ -84,7 +84,7 @@ public class Startup
         app.UseMiddleware<UserSessionMiddleware>();
 
         app.UseOpenApi();
-        app.UseSwaggerUi3();
+        app.UseSwaggerUi();
 
         app.UseEndpoints(endpoints =>
         {
