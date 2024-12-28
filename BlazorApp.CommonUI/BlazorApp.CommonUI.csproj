@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
@@ -12,10 +12,10 @@
 
   <ItemGroup>
     <PackageReference Include="MatBlazor" Version="2.10.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
-    <PackageReference Include="System.Net.Http.Json" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.0" />
     <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="14.0.0" />
   </ItemGroup>
 

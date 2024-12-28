@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BlazorApp.BLL.Infrastructure.Authorization;
 using BlazorApp.BLL.Infrastructure.Handlers;
 using BlazorApp.Common.Constants;
@@ -7,9 +8,8 @@ using BlazorApp.DAL;
 using BlazorApp.DAL.Interfaces;
 using BlazorApp.Domain.Entities;
 using Duende.IdentityServer.EntityFramework.DbContexts;
-using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -68,16 +68,13 @@ public static partial class ConfigurationExtension
 
         if (environment.IsDevelopment()) identityServerBuilder.AddDeveloperSigningCredential();
 
-        services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddIdentityServerAuthentication(options =>
+        services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
+            .AddJwtBearer(options =>
             {
                 options.Authority = authAuthority;
-                options.SupportedTokens = SupportedTokens.Jwt;
                 options.RequireHttpsMetadata = environment.IsProduction();
-                options.ApiName = CommonConstants.ApiName;
+                options.TokenValidationParameters.ValidAudiences =
+                    new List<string> { configuration[CommonConstants.ApiName] };
             });
 
         services.AddAuthorization(options =>
