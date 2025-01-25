@@ -13,7 +13,7 @@ using BlazorApp.Common.Models.Security;
 using BlazorApp.Common.Wrappers;
 using BlazorApp.DAL.Interfaces;
 using BlazorApp.Domain.Entities;
-using IdentityModel;
+using Duende.IdentityModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

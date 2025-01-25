@@ -6,7 +6,7 @@ using BlazorApp.Common.Helpers;
 using BlazorApp.Common.Interfaces;
 using BlazorApp.Common.Models.Enums;
 using BlazorApp.Common.Wrappers;
-using IdentityModel;
+using Duende.IdentityModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

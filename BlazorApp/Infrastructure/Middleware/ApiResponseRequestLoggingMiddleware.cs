@@ -14,7 +14,7 @@ using BlazorApp.Common.Models;
 using BlazorApp.Common.Models.Enums;
 using BlazorApp.Common.Wrappers;
 using BlazorApp.Domain.Entities;
-using IdentityModel;
+using Duende.IdentityModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

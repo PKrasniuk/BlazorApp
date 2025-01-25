@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using BlazorApp.Common.Constants;
 using BlazorApp.Common.Models.Security;
+using Duende.IdentityModel;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
-using IdentityModel;
 
 namespace BlazorApp.DAL.Infrastructure.Configurations;
 
