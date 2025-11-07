@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorApp.BLL.Infrastructure.Extensions;
 
@@ -51,7 +52,7 @@ public static partial class ConfigurationExtension
         {
             config.PostProcess = document =>
             {
-                document.Info.Version = assembly.GetName().Version.ToString();
+                document.Info.Version = assembly?.GetName().Version?.ToString();
                 document.Info.Title = "Blazor App";
                 document.Info.Description = "Blazor App Api";
             };
@@ -63,7 +64,8 @@ public static partial class ConfigurationExtension
         services.AddSingleton<IEmailConfiguration>(configuration.GetSection("EmailConfiguration")
             .Get<EmailConfiguration>());
 
-        var autoMapperConfig = new MapperConfiguration(config => { config.AddProfile(new MappingProfile()); });
+        var autoMapperConfig =
+            new MapperConfiguration(config => { config.AddProfile(new MappingProfile()); }, new LoggerFactory());
         services.AddSingleton(autoMapperConfig.CreateMapper());
 
         services.AddTransient<IValidator<ConfirmEmailModel>, ConfirmEmailModelValidator>();

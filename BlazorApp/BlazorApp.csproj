@@ -9,14 +9,14 @@
 
   <ItemGroup>
     <PackageReference Include="MatBlazor" Version="2.10.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.2" />
-    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.10" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
     <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="14.0.0" />
   </ItemGroup>
