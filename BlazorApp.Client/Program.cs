@@ -12,7 +12,7 @@ using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace BlazorApp.Client
 {
-    public class Program
+    public static class Program
     {
         public static async Task Main(string[] args)
         {
@@ -32,7 +32,7 @@ namespace BlazorApp.Client
             builder.Services.Add(new ServiceDescriptor(typeof(IUserProfileApi), typeof(UserProfileApi),
                 ServiceLifetime.Scoped));
             builder.Services.AddScoped<AppState>();
-            builder.Services.AddLoadingBar();
+            builder.Services.AddLoadingBarService();
             builder.Services.AddMatToaster(config =>
             {
                 config.Position = MatToastPosition.BottomRight;
@@ -43,9 +43,10 @@ namespace BlazorApp.Client
                 config.VisibleStateDuration = 3000;
             });
 
+            builder.UseLoadingBar();
+
             await builder
                 .Build()
-                .UseLoadingBar()
                 .RunAsync();
         }
     }
